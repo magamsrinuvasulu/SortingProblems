@@ -1,4 +1,4 @@
-lass Solution {
+class Solution {
     public static boolean customizedCondition(int a,int b){
         String ab=a+""+b;
         String ba=b+""+a;
