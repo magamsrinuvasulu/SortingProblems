@@ -1,0 +1,47 @@
+class Solution {
+    public static int binarySearch(int[] nums,int start,int target){
+        int end=nums.length-1;
+        int intialStart=start;
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            if(nums[mid]==target){
+                return nums[mid];
+            }if(nums[mid]>target){
+                end=mid-1;
+            }else{
+                start=mid+1;
+            }
+        }
+        if(start==nums.length)
+            return nums[nums.length-1];
+        if(intialStart==start)
+            return nums[intialStart];
+        
+        if(Math.abs(target-nums[start])<Math.abs(target-nums[start-1]))
+            return nums[start];
+        
+        return nums[start-1];
+    }
+    public int threeSumClosest(int[] nums, int target) {
+        Arrays.sort(nums);
+        int closest=Integer.MAX_VALUE;
+        int closestSum=0;
+        for(int i=0;i<nums.length-2;i++){
+            int a=nums[i];
+            for(int j=i+1;j<nums.length-1;j++){
+                int b=nums[j];
+                int tempC=target-(a+b);
+                int c=binarySearch(nums,j+1,tempC);
+                int sum=a+b+c;
+                if(sum==target){
+                    return target;
+                }
+                if(closest>Math.abs(target-sum)){
+                    closest=Math.abs(target-sum);
+                    closestSum=sum;
+                }
+            }
+        }
+        return closestSum;
+    }
+}
